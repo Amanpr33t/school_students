@@ -1,0 +1,22 @@
+const express = require('express')
+const router = express.Router()
+const { authenticate, authorizeAdmin } = require('../middleware/authentication')
+const uploadImage = require('../controllers/uploadImage')
+const addStudent = require('../controllers/addStudent')
+const addStudentMarks = require('../controllers/addStudentMarks')
+const getAllStudents = require('../controllers/getAllstudents')
+const login = require('../controllers/login')
+const changePassword= require('../controllers/changePassword')
+const {updatePassword,forgotPassword,verifyToken}=require('../controllers/forgotPassword')
+
+router.post('/addStudent', authenticate, authorizeAdmin, addStudent)
+router.post('/login', login)
+router.post('/uploadImage', authenticate, authorizeAdmin, uploadImage)
+router.post('/addStudentMarks', authenticate, authorizeAdmin, addStudentMarks)
+router.get('/getAllStudents', authenticate, authorizeAdmin, getAllStudents)
+router.post('/changePassword',authenticate,authorizeAdmin,changePassword)
+router.post('/forgotPassword',authenticate,authorizeAdmin,forgotPassword)
+router.post('/updatePassword',authenticate,authorizeAdmin,updatePassword)
+router.post('/verifyToken',authenticate,authorizeAdmin,verifyToken)
+
+module.exports = router
